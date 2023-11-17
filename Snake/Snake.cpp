@@ -1,7 +1,6 @@
 #include "Snake.h"
 #include "Board.h"
 #include <conio.h>
-#include <algorithm>
 
 Snake::Snake(size_t segments, Board* gameBoard) 
 	: m_snakeSegments{segments}, m_direction{'L'}, m_snakeLength{segments}, m_gameBoard{gameBoard}
@@ -77,6 +76,7 @@ void Snake::changeDirection()
 
 bool Snake::checkIfHit()
 {
+	//checking if snake collided with tail
 	for (int i = 1; i < m_snakeLength; i++) {
 
 		if (m_snakeSegments[i] == m_snakeSegments[0]) {
@@ -84,6 +84,7 @@ bool Snake::checkIfHit()
 		}
 	}
 
+	//checking if snake collided with wall
 	if (m_snakeSegments[0].xPos == 0 || m_snakeSegments[0].xPos == 119 || m_snakeSegments[0].yPos == 0 ||
 		m_snakeSegments[0].yPos == 29) {
 		return true;
