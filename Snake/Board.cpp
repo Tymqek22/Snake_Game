@@ -51,33 +51,3 @@ void Board::drawBoard()
 		}
 	}
 }
-
-Coordinates Board::getposition()
-{
-	Coordinates coords{ 0,0 };
-	
-	for (int i = 0; i < 30; ++i) {
-
-		for (int j = 0; j < 120; ++j) {
-
-			if (m_gameBoard[i][j] == 2) {
-				coords.yPos = i;
-				coords.xPos = j;
-				break;
-			}
-			
-		}
-	}
-
-	return coords;
-}
-
-void Board::moveSnake()
-{
-	Coordinates currentCoords = this->getposition();
-	m_gameBoard[currentCoords.yPos][currentCoords.xPos] = 0;
-
-	currentCoords.xPos -= 1;
-
-	m_gameBoard[currentCoords.yPos][currentCoords.xPos] = 2;
-}

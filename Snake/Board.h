@@ -10,6 +10,4 @@ public:
 	Board();
 	void assignValue(const Coordinates& coords, int value);
 	void drawBoard();
-	Coordinates getposition();
-	void moveSnake();
 };

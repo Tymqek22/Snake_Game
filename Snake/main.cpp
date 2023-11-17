@@ -8,7 +8,7 @@ int main()
 	Board b1;
 	Snake s1(15, &b1);
 
-	while (true) {
+	while (!s1.checkIfHit()) {
 		system("cls");
 		s1.placeSnake();
 		b1.drawBoard();

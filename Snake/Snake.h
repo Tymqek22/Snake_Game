@@ -5,6 +5,10 @@ struct Coordinates
 {
 	int yPos;
 	int xPos;
+
+	bool operator==(const Coordinates& coords) {
+		return (yPos == coords.yPos && xPos == coords.xPos);
+	}
 };
 class Board;
 
@@ -19,7 +23,7 @@ private:
 public:
 	Snake(size_t segments, Board* gameBoard);
 	void placeSnake();
-	void uploadSegmentsCoords();
 	void moveSnake();
 	void changeDirection();
+	bool checkIfHit();
 };
