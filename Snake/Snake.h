@@ -6,7 +6,7 @@ struct Coordinates
 	int yPos;
 	int xPos;
 
-	bool operator==(const Coordinates& coords) {
+	bool operator==(const Coordinates& coords) const {
 		return (yPos == coords.yPos && xPos == coords.xPos);
 	}
 };
@@ -26,4 +26,6 @@ public:
 	void moveSnake();
 	void changeDirection();
 	bool checkIfHit();
+	bool checkIfFruit();
+	void addSegment();
 };

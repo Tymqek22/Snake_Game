@@ -1,11 +1,16 @@
 #include <iostream>
 #include <random>
+#include <algorithm>
 #include "Board.h"
 
 struct Coordinates
 {
 	int yPos;
 	int xPos;
+
+	bool operator==(const Coordinates& coords) const {
+		return (yPos == coords.yPos && xPos == coords.xPos);
+	}
 };
 
 Board::Board()
@@ -29,6 +34,11 @@ Board::Board()
 int Board::getThePositionValue(const Coordinates& coords) const
 {
 	return m_gameBoard[coords.yPos][coords.xPos];
+}
+
+std::vector<Coordinates> Board::getFruitsPositions() const
+{
+	return m_fruitsPositions;
 }
 
 void Board::assignValue(const Coordinates& coords, int value)
@@ -67,13 +77,22 @@ void Board::generateFruit()
 	std::uniform_int_distribution<> yRange{ 1,28 };
 	std::uniform_int_distribution<> xRange{ 1,118 };
 
-	Coordinates coords{ 0,0 };
-	do {
-		coords.yPos = yRange(mt);
-		coords.xPos = xRange(mt);
-		if (this->getThePositionValue(coords) == 0) {
-			this->assignValue(coords, 3);
-		}
+	Coordinates coords{ yRange(mt),xRange(mt) };
 
-	} while (this->getThePositionValue(coords) == 0);
+	if (this->getThePositionValue(coords) == 0) {
+		this->assignValue(coords, 3);
+	}
+	else {
+		while (this->getThePositionValue(coords) != 0) {
+			coords.yPos = yRange(mt);
+			coords.xPos = xRange(mt);
+		}
+	}
+
+	m_fruitsPositions.push_back(coords);
+}
+
+void Board::deleteFruit(const Coordinates& coordsToDelete)
+{
+	m_fruitsPositions.erase(std::find(m_fruitsPositions.begin(), m_fruitsPositions.end(), coordsToDelete));
 }

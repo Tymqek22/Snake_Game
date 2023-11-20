@@ -40,7 +40,7 @@ void Snake::moveSnake()
 		m_snakeSegments[0].xPos++;
 	}
 
-	//assigning coordinates, which previous segment had before the snake made a move starting from the second segment
+	//assigning coordinates, which had previous segment before the snake made a move (starting from the second segment)
 	for (int i = 1; i < m_snakeLength; i++) {
 
 		m_snakeSegments[i] = segmentsCoords[i - 1];
@@ -48,6 +48,10 @@ void Snake::moveSnake()
 
 	//deleting the last snake's segment, which it had before the move
 	m_gameBoard->assignValue(segmentsCoords[segmentsCoords.size() - 1], 0);
+
+	if (checkIfFruit()) {
+		this->addSegment();
+	}
 }
 
 void Snake::changeDirection()
@@ -90,4 +94,28 @@ bool Snake::checkIfHit()
 		return true;
 	}
 	return false;
+}
+
+bool Snake::checkIfFruit()
+{
+	std::vector<Coordinates> fruitPositions = m_gameBoard->getFruitsPositions();
+
+	for (const Coordinates& coords : fruitPositions) {
+
+		if (m_snakeSegments[0] == coords) { 
+			m_gameBoard->deleteFruit(coords);
+			return true;
+		}
+	}
+	return false;
+}
+
+void Snake::addSegment()
+{
+	Coordinates newSegment = { 0,0 };
+	newSegment.xPos = m_snakeSegments[m_snakeLength - 1].xPos + 1;
+	newSegment.yPos = m_snakeSegments[m_snakeLength - 1].yPos;
+
+	m_snakeSegments.push_back(newSegment);
+	m_snakeLength++;
 }
