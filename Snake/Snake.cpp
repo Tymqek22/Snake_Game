@@ -59,21 +59,30 @@ void Snake::changeDirection()
 	if (_kbhit()) {
 
 		char sign = _getch();
-		switch (sign) {
-		case 'w':
-			m_direction = 'U';
-			break;
-		case 's':
-			m_direction = 'D';
-			break;
-		case 'a':
-			m_direction = 'L';
-			break;
-		case 'd':
-			m_direction = 'R';
-			break;
-		default:
-			break;
+
+		if (m_direction == 'U' || m_direction == 'D') {
+			switch (sign) {
+			case 'a':
+				m_direction = 'L';
+				break;
+			case 'd':
+				m_direction = 'R';
+				break;
+			default:
+				break;
+			}
+		}
+		else if (m_direction == 'L' || m_direction == 'R') {
+			switch (sign) {
+			case 'w':
+				m_direction = 'U';
+				break;
+			case 's':
+				m_direction = 'D';
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }

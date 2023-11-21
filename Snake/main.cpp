@@ -18,7 +18,6 @@ int main()
 		b1.drawBoard();
 		s1.changeDirection();
 		s1.moveSnake();
-		Sleep(50);
 		counter++;
 	}
 	system("pause");
