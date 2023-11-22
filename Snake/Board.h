@@ -6,8 +6,9 @@ struct Coordinates;
 class Board
 {
 private:
-	int m_gameBoard[30][120];
+	int m_gameBoard[29][120];
 	std::vector<Coordinates> m_fruitsPositions;
+	int m_points;
 public:
 	Board();
 	int getThePositionValue(const Coordinates& coords) const;
@@ -16,4 +17,6 @@ public:
 	void drawBoard();
 	void generateFruit();
 	void deleteFruit(const Coordinates& coordsToDelete);
+	void addPoint();
+	void displayPoints();
 };

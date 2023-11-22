@@ -14,6 +14,7 @@ int main()
 		if (counter % 40 == 0) {
 			b1.generateFruit();
 		}
+		b1.displayPoints();
 		s1.placeSnake();
 		b1.drawBoard();
 		s1.changeDirection();

@@ -15,11 +15,11 @@ struct Coordinates
 
 Board::Board()
 {
-	for (int i = 0; i < 30; ++i) {
+	for (int i = 0; i < 29; ++i) {
 
 		for (int j = 0; j < 120; ++j) {
 			
-			if (i == 0 || i == 29 || j == 0 || j == 119) {
+			if (i == 0 || i == 28 || j == 0 || j == 119) {
 				m_gameBoard[i][j] = 1;
 			}
 			else {
@@ -29,6 +29,7 @@ Board::Board()
 	}
 
 	m_gameBoard[15][60] = 2;
+	m_points = 0;
 }
 
 int Board::getThePositionValue(const Coordinates& coords) const
@@ -48,7 +49,7 @@ void Board::assignValue(const Coordinates& coords, int value)
 
 void Board::drawBoard()
 {
-	for (int i = 0; i < 30; ++i) {
+	for (int i = 0; i < 29; ++i) {
 
 		for (int j = 0; j < 120; ++j) {
 
@@ -65,7 +66,7 @@ void Board::drawBoard()
 				std::cout << '$';
 			}
 		}
-		if (i != 29) {
+		if (i != 28) {
 			std::cout << '\n';
 		}
 	}
@@ -74,7 +75,7 @@ void Board::drawBoard()
 void Board::generateFruit()
 {
 	std::mt19937 mt{ std::random_device{}() };
-	std::uniform_int_distribution<> yRange{ 1,28 };
+	std::uniform_int_distribution<> yRange{ 1,27 };
 	std::uniform_int_distribution<> xRange{ 1,118 };
 
 	Coordinates coords{ yRange(mt),xRange(mt) };
@@ -95,4 +96,14 @@ void Board::generateFruit()
 void Board::deleteFruit(const Coordinates& coordsToDelete)
 {
 	m_fruitsPositions.erase(std::find(m_fruitsPositions.begin(), m_fruitsPositions.end(), coordsToDelete));
+}
+
+void Board::addPoint()
+{
+	m_points++;
+}
+
+void Board::displayPoints()
+{
+	std::cout << "Points: " << m_points << '\n';
 }

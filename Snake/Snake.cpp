@@ -51,6 +51,7 @@ void Snake::moveSnake()
 
 	if (checkIfFruit()) {
 		this->addSegment();
+		m_gameBoard->addPoint();
 	}
 }
 
@@ -99,7 +100,7 @@ bool Snake::checkIfHit()
 
 	//checking if snake collided with wall
 	if (m_snakeSegments[0].xPos == 0 || m_snakeSegments[0].xPos == 119 || m_snakeSegments[0].yPos == 0 ||
-		m_snakeSegments[0].yPos == 29) {
+		m_snakeSegments[0].yPos == 28) {
 		return true;
 	}
 	return false;
